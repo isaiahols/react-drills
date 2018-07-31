@@ -1,18 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import Todo from './Componenets/Todo';
+
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      list: ['stuff'],
+      userInput: ''
+    };
+    this.handleUserInput = this.handleUserInput.bind(this);
+  }
+
+  handleUserInput(e) {
+    this.setState({
+      userInput: e.target.value
+    });
+  }
+
+  handleUpdateList() {
+    this.setState({
+      list: [...this.state.list, this.state.userInput],
+      userInput: ''
+    });
+  }
+
   render() {
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <input
+          type="text"
+          onChange={e => this.handleUserInput(e)}
+          value={this.state.userInput}
+        />
+        <button onClick={() => this.handleUpdateList()}>Add</button>
+        <Todo todoList={this.state.list} />
       </div>
     );
   }

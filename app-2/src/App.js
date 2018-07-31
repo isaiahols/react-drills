@@ -3,16 +3,20 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+
+    this.state={
+      array: ['one','two','three','four']
+    }
+  }
+
   render() {
+    let printing = this.state.array.map((val,i)=><h2 id={i}>{val}</h2>)
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {printing}
       </div>
     );
   }
